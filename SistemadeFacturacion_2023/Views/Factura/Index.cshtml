@@ -1,0 +1,143 @@
+﻿@model List<SistemadeFacturacion_2023.Models.Factura>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">Facturas</h1>
+
+<div class="row col-12 mt-5 mb-3 d-flex justify-content-center align-items-end">
+    <div class="mr-2">
+        <a asp-action="Create" class="btn btn-primary btn-block">Crear Nueva Factura </a>
+    </div>
+    <form asp-action="Filtro" class="form-inline d-flex align-items-center col-4">
+        <div class="flex-grow-1">
+            <input type="number" name="codigo" class="form-control form-control-sm mr-2 btn-block" placeholder="ID de Factura" />
+        </div>
+        <div>
+            <button type="submit" class="btn btn-success btn-block">Buscar</button>
+        </div>
+    </form>
+</div>
+
+@if (Model.Count > 0)
+{
+  
+    <table class="table table-hover table-striped text-center table-responsive table-light">
+
+        <thead>
+            <tr>
+                <th>
+                    IDFactura
+                </th>
+                <th>
+                    Codigo
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Articulo
+                </th>
+                <th>
+                    Cantidad
+                </th>
+                <th>
+                    PrecioDeVenta
+                </th>
+                <th>
+                    Impuesto
+                </th>
+                <th>
+                    MontoPorLinea
+                </th>
+                <th>
+                    IDcliente
+                </th>
+                <th>
+                    Actions
+                </th>
+             
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+        <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDFactura)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Codigo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Articulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cantidad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PrecioDeVenta)
+                    </td>
+                    <td>
+                        @item.Impuesto
+                    </td>
+                    <td>
+                        @item.MontoPorLinea
+                    </td>
+                    <td>
+                        @item.IdCliente
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IDFactura }, new {@class = "btn btn-success"}) |
+                        @Html.ActionLink("Details", "Details", new { id = item.IDFactura }, new { @class = "btn btn-warning" }) |
+                        <a href="javascript:void(0);" class="btn btn-danger delete-btn" data-toggle="modal" data-target="#deleteConfirmationModal-@item.IDFactura">Delete</a>
+
+                        <a asp-action="Imprimir" asp-route-Id="@item.IDFactura" class="btn btn-secondary btn-block mt-2 col-4 text-center">Imprimir</a>
+
+                    </td>
+                   
+                </tr>
+            
+       
+            
+        </tbody>
+        <div class="modal fade" id="deleteConfirmationModal-@item.IDFactura" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirmar Eliminación</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de que quieres eliminar esta propiedad?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <a asp-controller="Factura" asp-action="Delete" asp-route-id="@item.IDFactura" class="btn btn-danger" id="confirmDelete">Eliminar</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </table>
+
+
+}
+
+else
+
+{
+    <h5 class="alert alert-danger text-center"> No se podido localizar una Factura con ese Codigo. </h5>
+    <h5 class="alert alert-primary"> Si desea pueden crear una nueva factura: <a asp-action="Create" class="text-danger">Crear Nueva Factura</a></h5>
+}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

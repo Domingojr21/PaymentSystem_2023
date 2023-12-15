@@ -1,0 +1,70 @@
+﻿@model IEnumerable<SistemadeFacturacion_2023.Models.Clientes>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container col-12">
+    <div class="row col-12 mt-5 mb-3 d-flex justify-content-center align-items-end">
+        <div class="mr-2">
+            <a asp-action="Create" class="btn btn-primary">Crear Nuevo Cliente</a>
+        </div>
+        <form asp-action="Filtro" class="form-inline d-flex align-items-center col-4">
+            <div class="flex-grow-1">
+                <input type="number" name="Id" class="form-control form-control-sm mr-2 btn-block" placeholder="ID de Cliente" />
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success btn-block">Buscar</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-10">
+
+        <table class="table table-hover table-striped text-center table-responsive table-light">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IDidentificacion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PagaImpuesto)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IDidentificacion)
+                        </td>
+                       @*  @if (item.PagaImpuesto)
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PagaImpuesto)
+                            </td>
+                        }
+                       *@
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.IDcliente }, new { @class = "btn btn-success" }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.IDcliente }, new { @class = "btn btn-warning" }) |
+                            <a href="javascript:void(0);" class="btn btn-danger delete-btn" data-toggle="modal" data-target="#deleteConfirmationModal-@item.IDcliente">Delete</a>
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+   
+
+
+</div>

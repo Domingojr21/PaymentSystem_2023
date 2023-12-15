@@ -1,0 +1,89 @@
+﻿@model IEnumerable<SistemadeFacturacion_2023.Models.Productos>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Crear Nuevo Cliente</a>
+</p>
+<table class="table table-hover table-striped text-center table-responsive table-light">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IDProductos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Item)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CantidadEnExistencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Costo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PreciodeVenta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Impuesto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EstatusProducto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BarCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ruta)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IDProductos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Item)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CantidadEnExistencia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Costo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PreciodeVenta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Impuesto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EstatusProducto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BarCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ruta)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IDProductos }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IDProductos }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IDProductos })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,69 @@
+﻿@model SistemadeFacturacion_2023.Models.Factura
+
+@{
+    ViewData["Title"] = "Create";
+    List<Clientes> clientes = ViewBag.clienteList;
+    bool editMode = @Model.IDFactura > 0 ? true : false;
+}
+
+<h2> @(editMode ? "Editar Factura" : "Crear una Factura")</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action=@(editMode ? "Edit" : "Create")>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input asp-for="IDFactura" class="form-control" hidden />
+            <div class="form-group">
+                <label asp-for="Codigo" class="control-label"></label>
+                <input asp-for="Codigo" class="form-control" />
+                <span asp-validation-for="Codigo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Articulo" class="control-label"></label>
+                <input asp-for="Articulo" class="form-control" />
+                <span asp-validation-for="Articulo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cantidad" class="control-label"></label>
+                <input type="number" asp-for="Cantidad" class="form-control" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrecioDeVenta" class="control-label"></label>
+                <input type="number"  asp-for="PrecioDeVenta" class="form-control" />
+                <span asp-validation-for="PrecioDeVenta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Impuesto" class="control-label"></label>
+                <input type="number" asp-for="Impuesto" class="form-control" />
+                <span asp-validation-for="Impuesto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MontoPorLinea" class="control-label"></label>
+                <input type="number" asp-for="MontoPorLinea" class="form-control" />
+                <span asp-validation-for="MontoPorLinea" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdCliente" class="control-label"></label>
+                <select asp-for="IdCliente" class="form-control mt-2">
+                    <option value="">Seleccione un Cliente: </option>
+                    @foreach(var cliente in clientes)
+                    {
+                        <option value="@cliente.IDcliente">@cliente.Nombre</option>
+                    }
+                </select>
+             
+            </div>
+            <input asp-for="Fecha" hidden/>
+            <div class="form-group mt-3">
+                <input type="submit" value="@(editMode ? "Edit" : "Create")" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
